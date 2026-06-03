@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* Giữ nguyên gốc 100% font máy đánh chữ góc cạnh cho toàn bộ trang */
+    /* KHÔI PHỤC VÀ GIỮ NGUYÊN GỐC 100% BỘ FONT CHỮ CỦA BẠN */
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -63,7 +63,6 @@ header {
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--border-color);
-    /* Lớp phủ đen trắng nguyên bản cực ngầu */
     filter: grayscale(100%) contrast(105%);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -103,12 +102,13 @@ header .bio p {
     margin-bottom: 4px;
 }
 
-/* --- SECTION STYLE --- */
+/* --- SECTION STYLE & ANIMATION CLASS --- */
 section {
     margin-bottom: 60px;
+    /* Các thuộc tính cấu hình cho hiệu ứng cuộn mượt bằng JS */
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 section.visible {
@@ -286,6 +286,7 @@ h2.section-title {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 16px;
+    cursor: pointer; /* Đổi con trỏ thành dạng bàn tay khi di chuột vào thẻ ngân hàng */
     transition: border-color 0.3s;
 }
 
@@ -306,6 +307,7 @@ h2.section-title {
     font-weight: bold;
     letter-spacing: 1px;
     color: #d1d1d1;
+    transition: color 0.2s ease;
 }
 
 /* --- ANIMATIONS --- */
@@ -314,10 +316,10 @@ h2.section-title {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- RESPONSIVE MOBILE TỐI ƯU --- */
+/* --- RESPONSIVE TỐI ƯU SMARTPHONE --- */
 @media (max-width: 600px) {
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* Chuyển thành 2 cột trên điện thoại */
+        grid-template-columns: repeat(2, 1fr); /* Đổi thành 2 cột trên điện thoại để ảnh không bị quá bé */
         gap: 8px;
     }
     .bank-grid {
@@ -328,7 +330,7 @@ h2.section-title {
     }
 }
 
-/* --- NÚT GỌI ĐIỆN CỐ ĐỊNH (FLOATING CALL BUTTON) - ĂN THEO FONT COURIER NEW --- */
+/* --- NÚT GỌI ĐIỆN CỐ ĐỊNH (FLOATING CALL BUTTON) --- */
 .mobile-call-btn {
     position: fixed;
     bottom: 24px;
@@ -341,8 +343,7 @@ h2.section-title {
     gap: 8px;
     padding: 12px 18px;
     border-radius: 40px; 
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); 
-    font-family: 'Courier New', Courier, monospace; /* Đồng bộ font máy đánh chữ */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); 
     font-size: 0.85rem;
     font-weight: bold;
     z-index: 9999; 
