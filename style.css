@@ -1,4 +1,5 @@
-/* --- DESIGN SYSTEM (DARK MINIMALISM) --- */
+/* --- CÁC CẤU HÌNH GỐC ĐÃ CÓ - GIỮ NGUYÊN VÀ BỔ SUNG PHẦN DƯỚI ĐÂY --- */
+
 :root {
     --bg-color: #050505;
     --text-color: #ffffff;
@@ -12,7 +13,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* KHÔI PHỤC VÀ GIỮ NGUYÊN GỐC 100% BỘ FONT CHỮ CỦA BẠN */
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -23,7 +23,6 @@ body {
     line-height: 1.6;
 }
 
-/* Lớp phủ mờ cinematic nền hạt grain mịn */
 .bg-overlay {
     position: fixed;
     top: 0;
@@ -36,14 +35,12 @@ body {
     pointer-events: none;
 }
 
-/* --- CONTAINER --- */
 .container {
     max-width: 700px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
-/* --- HEADER SECTION --- */
 header {
     text-align: center;
     margin-bottom: 60px;
@@ -102,10 +99,8 @@ header .bio p {
     margin-bottom: 4px;
 }
 
-/* --- SECTION STYLE & ANIMATION CLASS --- */
 section {
     margin-bottom: 60px;
-    /* Các thuộc tính cấu hình cho hiệu ứng cuộn mượt bằng JS */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -127,7 +122,6 @@ h2.section-title {
     font-weight: normal;
 }
 
-/* --- TIMELINE --- */
 .timeline-item {
     position: relative;
     padding-left: 24px;
@@ -174,7 +168,6 @@ h2.section-title {
     color: #666666;
 }
 
-/* --- INSTAGRAM ARTWORK GRID --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -227,7 +220,6 @@ h2.section-title {
     opacity: 1;
 }
 
-/* --- LINK DIRECTORY --- */
 .links-list {
     display: flex;
     flex-direction: column;
@@ -275,7 +267,6 @@ h2.section-title {
     transform: translateX(2px);
 }
 
-/* --- BANKING ACCOUNTS --- */
 .bank-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -286,7 +277,7 @@ h2.section-title {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 16px;
-    cursor: pointer; /* Đổi con trỏ thành dạng bàn tay khi di chuột vào thẻ ngân hàng */
+    cursor: pointer;
     transition: border-color 0.3s;
 }
 
@@ -295,6 +286,7 @@ h2.section-title {
 }
 
 .bank-name {
+    font-size: 0.7 Club;
     font-size: 0.7rem;
     color: var(--accent-color);
     text-transform: uppercase;
@@ -310,16 +302,14 @@ h2.section-title {
     transition: color 0.2s ease;
 }
 
-/* --- ANIMATIONS --- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- RESPONSIVE TỐI ƯU SMARTPHONE --- */
 @media (max-width: 600px) {
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr); /* Đổi thành 2 cột trên điện thoại để ảnh không bị quá bé */
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
     .bank-grid {
@@ -330,50 +320,107 @@ h2.section-title {
     }
 }
 
-/* --- NÚT GỌI ĐIỆN CỐ ĐỊNH (FLOATING CALL BUTTON) --- */
-.mobile-call-btn {
+/* ==================== PHẦN CSS BỔ SUNG ĐỂ DỰNG POPUP MORE LINKS ==================== */
+
+/* Khung nền phủ đen mờ mượt toàn màn hình */
+.popup-overlay {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
-    background-color: #ffffff; 
-    color: #000000;
-    text-decoration: none;
-    display: inline-flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 3, 3, 0.96); /* Đen mờ sâu sắc nghệ thuật */
+    backdrop-filter: blur(8px); /* Tạo hiệu ứng mờ kính cường lực kính cho background */
+    z-index: 10000; /* Luôn nổi lên trên cùng */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 8px;
-    padding: 12px 18px;
-    border-radius: 40px; 
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); 
-    font-size: 0.85rem;
-    font-weight: bold;
-    z-index: 9999; 
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    pointer-events: none; /* Vô hiệu tương tác khi chưa mở */
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.call-icon {
-    width: 16px;
-    height: 16px;
+/* Khi active popup sẽ hiển thị */
+.popup-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.mobile-call-btn:hover {
-    transform: translateY(-4px); 
-    background-color: #050505;  
-    color: #ffffff;
-    border-color: var(--hover-border);
+/* Hộp chứa danh sách link ở giữa màn hình */
+.popup-content {
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh; /* Chiều cao tối đa bằng 85% màn hình thiết bị */
+    background-color: #080808;
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.96) translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mobile-call-btn:active {
-    transform: translateY(-1px) scale(0.96); 
+.popup-overlay.active .popup-content {
+    transform: scale(1) translateY(0);
 }
 
-@media screen and (max-width: 360px) {
-    .mobile-call-btn {
-        padding: 12px;
-        bottom: 16px;
-        right: 16px;
-    }
-    .call-text {
-        display: none; /* Ẩn chữ chừa lại icon trên màn hình quá bé */
-    }
+/* Tiêu đề popup và nút đóng nằm trên cùng */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.popup-title {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: var(--accent-color);
+    font-weight: normal;
+}
+
+/* Nút Tắt Đóng popup tối giản cơ khí máy tính */
+.popup-close-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.popup-close-btn:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+/* Vùng chứa danh sách các link mở rộng có thanh cuộn mượt ẩn */
+.popup-links-container {
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 4px;
+}
+
+/* Tùy biến thanh cuộn trong hộp popup cho gọn đẹp */
+.popup-links-container::-webkit-scrollbar {
+    width: 3px;
+}
+.popup-links-container::-webkit-scrollbar-track {
+    background: #050505;
+}
+.popup-links-container::-webkit-scrollbar-thumb {
+    background: #222222;
+}
+
+/* Khóa hành vi cuộn của trang chính khi popup đang mở */
+body.popup-open {
+    overflow: hidden;
 }

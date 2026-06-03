@@ -1,48 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 1. TÍNH NĂNG CLICK SAO CHÉP NHANH SỐ TÀI KHOẢN ---
-    const bankCards = document.querySelectorAll('.bank-card');
+    // --- 1. TÍNH NĂNG ĐÓNG / MỞ POPUP MORE NETWORKS ---
+    const openPopupBtn = document.getElementById('open-more-btn');
+    const closePopupBtn = document.getElementById('close-more-btn');
+    const popupOverlay = document.getElementById('more-links-popup');
     
+    // Hàm mở popup
+    if (openPopupBtn && popupOverlay) {
+        openPopupBtn.addEventListener('click', () => {
+            popupOverlay.classList.add('active');
+            document.body.classList.add('popup-open'); // Khóa cuộn trang nền dưới
+        });
+    }
+
+    // Hàm đóng popup quay lại đúng vị trí cũ trước đó
+    if (closePopupBtn && popupOverlay) {
+        closePopupBtn.addEventListener('click', () => {
+            popupOverlay.classList.remove('active');
+            document.body.classList.remove('popup-open'); // Mở khóa cuộn trang nền dưới
+        });
+        
+        // Đóng popup khi kích chuột ra ngoài vùng hộp đen nội dung (vùng Overlay trống)
+        popupOverlay.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.classList.remove('active');
+                document.body.classList.remove('popup-open');
+            }
+        });
+    }
+
+
+    // --- 2. TÍNH NĂNG CLICK SAO CHÉP NHANH SỐ TÀI KHOẢN ---
+    const bankCards = document.querySelectorAll('.bank-card');
     bankCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Lấy giá trị chuỗi số tài khoản trong thuộc tính data-copy
             const textToCopy = this.getAttribute('data-copy');
-            
             if (textToCopy) {
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     const numberDOM = this.querySelector('.bank-number');
                     const originalNumber = numberDOM.innerText;
                     
-                    // Hiển thị trạng thái thông báo thành công trực tiếp dạng ma trận/hacker
                     numberDOM.innerText = "COPIED! ✓";
-                    numberDOM.style.color = "#00ff66"; // Màu xanh lá neon làm điểm nhấn công nghệ
+                    numberDOM.style.color = "#00ff66";
                     
-                    // Trả lại số tài khoản nguyên bản sau 1.2 giây
                     setTimeout(() => {
                         numberDOM.innerText = originalNumber;
                         numberDOM.style.color = "#d1d1d1";
                     }, 1200);
                 }).catch(err => {
-                    console.error('Lỗi, không thể sao chép tự động: ', err);
+                    console.error('Lỗi sao chép: ', err);
                 });
             }
         });
     });
 
-    // --- 2. HIỆU ỨNG CUỘN TRANG MỜ DẦN (SMOOTH SCROLL ANIMATION) ---
+
+    // --- 3. HIỆU ỨNG CUỘN TRANG MỜ DẦN (SMOOTH SCROLL ANIMATION) ---
     const scrollSections = document.querySelectorAll('.scroll-anim');
-    
     const observerOptions = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.15 // Kích hoạt khi 15% diện tích section xuất hiện trên màn hình
+        threshold: 0.15
     };
 
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
+    const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Ngừng theo dõi section này sau khi nó đã hiển thị xong để tối ưu hiệu năng máy
                 sectionObserver.unobserve(entry.target);
             }
         });
