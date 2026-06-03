@@ -1,0 +1,378 @@
+/* --- DESIGN SYSTEM (DARK MINIMALISM) --- */
+:root {
+    --bg-color: #050505;
+    --text-color: #ffffff;
+    --accent-color: #777777;
+    --card-bg: #0f0f0f;
+    --border-color: #1a1a1a;
+    --hover-border: #444444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Giữ nguyên gốc 100% font máy đánh chữ góc cạnh cho toàn bộ trang */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Lớp phủ mờ cinematic nền hạt grain mịn */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 30%, var(--bg-color) 90%), 
+                url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.02"/%3E%3C/svg%3E');
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- CONTAINER --- */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* --- HEADER SECTION --- */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+.avatar-container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 24px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    /* Lớp phủ đen trắng nguyên bản cực ngầu */
+    filter: grayscale(100%) contrast(105%);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.avatar-container:hover .avatar {
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.04);
+    border-color: var(--hover-border);
+}
+
+header h1 {
+    font-size: 1.6rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+header p.subtitle {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+
+header .bio {
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 0.85rem;
+    color: #999999;
+    border-left: 1px solid #222;
+    padding-left: 16px;
+    text-align: left;
+}
+
+header .bio p {
+    margin-bottom: 4px;
+}
+
+/* --- SECTION STYLE --- */
+section {
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2.section-title {
+    font-size: 0.95rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 28px;
+    color: var(--accent-color);
+    font-weight: normal;
+}
+
+/* --- TIMELINE --- */
+.timeline-item {
+    position: relative;
+    padding-left: 24px;
+    border-left: 1px solid var(--border-color);
+    margin-bottom: 28px;
+    transition: border-color 0.3s;
+}
+
+.timeline-item:hover {
+    border-left-color: var(--hover-border);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    background-color: #333;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.timeline-item:hover::before {
+    background-color: var(--text-color);
+}
+
+.timeline-time {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.timeline-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.timeline-subtitle {
+    font-size: 0.85rem;
+    color: #666666;
+}
+
+/* --- INSTAGRAM ARTWORK GRID --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.gallery-link {
+    text-decoration: none;
+    display: block;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background-color: #0b0b0b;
+    position: relative;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(0.85) contrast(110%);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-link:hover .gallery-img {
+    filter: grayscale(100%) brightness(1) contrast(100%);
+    transform: scale(1.05);
+}
+
+.gallery-link:hover {
+    border-color: var(--hover-border);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 0.65rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.gallery-link:hover .gallery-caption {
+    opacity: 1;
+}
+
+/* --- LINK DIRECTORY --- */
+.links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-card:hover {
+    background-color: #141414;
+    border-color: var(--hover-border);
+    transform: translateX(4px);
+}
+
+.link-info h3 {
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.link-info p {
+    font-size: 0.75rem;
+    color: var(--accent-color);
+}
+
+.arrow {
+    font-size: 0.8rem;
+    color: #444;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.link-card:hover .arrow {
+    color: var(--text-color);
+    transform: translateX(2px);
+}
+
+/* --- BANKING ACCOUNTS --- */
+.bank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.bank-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    transition: border-color 0.3s;
+}
+
+.bank-card:hover {
+    border-color: var(--hover-border);
+}
+
+.bank-name {
+    font-size: 0.7rem;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.bank-number {
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #d1d1d1;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE MOBILE TỐI ƯU --- */
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* Chuyển thành 2 cột trên điện thoại */
+        gap: 8px;
+    }
+    .bank-grid {
+        grid-template-columns: 1fr;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+}
+
+/* --- NÚT GỌI ĐIỆN CỐ ĐỊNH (FLOATING CALL BUTTON) - ĂN THEO FONT COURIER NEW --- */
+.mobile-call-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background-color: #ffffff; 
+    color: #000000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 40px; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); 
+    font-family: 'Courier New', Courier, monospace; /* Đồng bộ font máy đánh chữ */
+    font-size: 0.85rem;
+    font-weight: bold;
+    z-index: 9999; 
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.call-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.mobile-call-btn:hover {
+    transform: translateY(-4px); 
+    background-color: #050505;  
+    color: #ffffff;
+    border-color: var(--hover-border);
+}
+
+.mobile-call-btn:active {
+    transform: translateY(-1px) scale(0.96); 
+}
+
+@media screen and (max-width: 360px) {
+    .mobile-call-btn {
+        padding: 12px;
+        bottom: 16px;
+        right: 16px;
+    }
+    .call-text {
+        display: none; /* Ẩn chữ chừa lại icon trên màn hình quá bé */
+    }
+}
