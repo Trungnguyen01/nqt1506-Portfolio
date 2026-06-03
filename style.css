@@ -15,12 +15,21 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+/* ẨN THANH CUỘN DỌC TOÀN TRANG WEB TRÊN PC TRÌNH DUYỆT CHROME/SAFARI */
+::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
     line-height: 1.6;
-    -webkit-text-size-adjust: 100%; /* Tránh lỗi tự zoom chữ trên iOS */
+    -webkit-text-size-adjust: 100%;
+    /* Ẩn thanh cuộn trên trình duyệt Firefox & IE */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
 .bg-overlay {
@@ -39,7 +48,7 @@ body {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    padding: 40px 20px 100px; /* Thêm khoảng trống padding-bottom rộng rãi tránh đè nút Call */
+    padding: 40px 20px 100px; 
 }
 
 header {
@@ -123,7 +132,6 @@ h2.section-title {
     font-weight: normal;
 }
 
-/* --- TIMELINE --- */
 .timeline-item {
     position: relative;
     padding-left: 20px;
@@ -170,7 +178,6 @@ h2.section-title {
     color: #666666;
 }
 
-/* --- GALLERY GRID --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -223,7 +230,6 @@ h2.section-title {
     opacity: 1;
 }
 
-/* --- LINKS DIRECTORY --- */
 .links-list {
     display: flex;
     flex-direction: column;
@@ -271,7 +277,6 @@ h2.section-title {
     transform: translateX(2px);
 }
 
-/* --- BANKING --- */
 .bank-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -315,7 +320,7 @@ h2.section-title {
 /* RESPONSIVE CHO MOBILE */
 @media (max-width: 600px) {
     .container {
-        padding: 30px 16px 120px; /* Tăng padding bottom cho mobile thoáng đãng */
+        padding: 30px 16px 120px; 
     }
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -334,7 +339,7 @@ h2.section-title {
     }
 }
 
-/* ==================== SỬA HIỆU ỨNG VỤT LÊN NHẸ NHÀNG CHO POPUP ==================== */
+/* ==================== FIX: POPUP CHẬM MƯỢT & NHUỘM ĐEN THANH TRƯỢT PC ==================== */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -343,14 +348,15 @@ h2.section-title {
     height: 100vh;
     background-color: rgba(3, 3, 3, 0.95); 
     backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); /* Tương thích Safari iOS */
-    z-index: 999999; /* Luôn nổi trên tất cả */
+    -webkit-backdrop-filter: blur(12px); 
+    z-index: 999999; 
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     pointer-events: none; 
-    transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    /* Xuất hiện nhè nhẹ mượt mà */
+    transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .popup-overlay.active {
@@ -367,13 +373,11 @@ h2.section-title {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    
-    /* Hiệu ứng ban đầu: Thu nhỏ nhẹ và chìm xuống */
-    transform: scale(0.92) translateY(15px);
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); /* Tạo độ vụt lên nảy nhẹ tinh tế */
+    /* Vụt từ dưới lên sâu lắng */
+    transform: scale(0.9) translateY(30px);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
 }
 
-/* Khi active: Vụt lên nhẹ và phóng to về kích thước chuẩn */
 .popup-overlay.active .popup-content {
     transform: scale(1) translateY(0);
 }
@@ -418,17 +422,38 @@ h2.section-title {
     flex-direction: column;
     gap: 10px;
     padding-right: 4px;
-    -webkit-overflow-scrolling: touch; /* Giúp cuộn mượt mà móng tay trên iOS */
+    -webkit-overflow-scrolling: touch; 
+    
+    /* Ẩn thanh cuộn mặc định Firefox & IE */
+    scrollbar-width: none !important; 
+    -ms-overflow-style: none !important; 
 }
 
+/* THAY MÀU THANH TRƯỢT THÀNH MÀU ĐEN TRÙNG MÀU NỀN TRÊN CHROME/EDGE PC */
+.popup-links-container::-webkit-scrollbar {
+    width: 6px !important;
+    background-color: #0a0a0a !important;
+}
+
+.popup-links-container::-webkit-scrollbar-track {
+    background-color: #0a0a0a !important;
+}
+
+.popup-links-container::-webkit-scrollbar-thumb {
+    background-color: #0a0a0a !important; /* Đen tuyền tàng hình */
+    border-radius: 10px;
+}
+
+/* LỚP KHÓA CUỘN NỀN CHÍNH */
 body.popup-open {
-    overflow: hidden; 
+    overflow: hidden !important;
+    height: 100vh !important;
 }
 
-/* ==================== SỬA TRIỆT ĐỂ: NÚT GỌI ĐIỆN LUÔN LUÔN LƠ LỬNG TRÊN MỌI THIẾT BỊ ==================== */
+/* ==================== NÚT GỌI ĐIỆN LUÔN LUÔN LƠ LỬNG ==================== */
 .mobile-call-btn {
     position: fixed !important;
-    bottom: 28px !important; /* Đẩy cao lên một chút tránh bị lấp bởi thanh điều hướng Mobile */
+    bottom: 28px !important; 
     right: 24px !important;
     background-color: #ffffff !important; 
     color: #000000 !important; 
@@ -442,11 +467,9 @@ body.popup-open {
     font-size: 0.8rem !important;
     font-weight: 900 !important;
     letter-spacing: 1.5px !important;
-    z-index: 99998 !important; /* Nằm ngay dưới popup một tí nhưng luôn trên nội dung trang web */
+    z-index: 99998 !important; 
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    
-    /* Kích hoạt hiệu ứng thở nhấp nháy nhẹ thu hút ánh nhìn */
     animation: pulseGlow 3s infinite ease-in-out;
 }
 
@@ -456,7 +479,6 @@ body.popup-open {
     fill: #000000 !important; 
 }
 
-/* Hiệu ứng di chuột trên máy tính */
 .mobile-call-btn:hover {
     transform: translateY(-5px) scale(1.03) !important; 
     background-color: #00ff66 !important; 
@@ -467,27 +489,25 @@ body.popup-open {
     transform: translateY(-1px) scale(0.97) !important; 
 }
 
-/* Animation nhấp nháy nhẹ nhàng cho thiết bị di động */
 @keyframes pulseGlow {
     0% { box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6); }
     50% { box-shadow: 0 10px 35px rgba(255, 255, 255, 0.25); }
     100% { box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6); }
 }
 
-/* Tối ưu hóa kích thước nút trên Mobile màn hình nhỏ hẳn (<= 480px) */
 @media screen and (max-width: 480px) {
     .mobile-call-btn {
-        padding: 14px !important; /* Biến thành hình tròn tối giản trên điện thoại */
+        padding: 14px !important; 
         bottom: 24px !important;
         right: 20px !important;
         border-radius: 50% !important;
         gap: 0px !important;
     }
     .call-text {
-        display: none !important; /* Ẩn chữ CALL ME để giao diện di động tinh tế, gọn gàng */
+        display: none !important; 
     }
     .call-icon {
-        width: 18px !important; /* Tăng nhẹ cỡ Icon điện thoại để dễ bấm bằng ngón cái */
+        width: 18px !important; 
         height: 18px !important;
     }
 }
