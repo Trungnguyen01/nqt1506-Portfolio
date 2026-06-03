@@ -37,11 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const originalNumber = numberDOM.innerText;
                     
                     numberDOM.innerText = "COPIED! ✓";
-                    numberDOM.style.color = "#00ff66"; 
+                    numberDOM.style.setProperty('color', '#00ff66', 'important'); 
                     
                     setTimeout(() => {
                         numberDOM.innerText = originalNumber;
-                        numberDOM.style.color = "#d1d1d1";
+                        numberDOM.style.setProperty('color', '#d1d1d1', 'important');
                     }, 1200);
                 }).catch(err => {
                     console.error('Lỗi: ', err);
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const observerOptions = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.15
+        threshold: 0.1
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
