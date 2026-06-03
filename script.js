@@ -9,18 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (openPopupBtn && popupOverlay) {
         openPopupBtn.addEventListener('click', () => {
             popupOverlay.classList.add('active');
-            document.body.classList.add('popup-open'); // Khóa cuộn trang nền dưới
+            document.body.classList.add('popup-open'); // Khóa trạng thái cuộn của trang chính phía dưới
         });
     }
 
-    // Hàm đóng popup quay lại đúng vị trí cũ trước đó
+    // Hàm đóng popup quay lại đúng vị trí đang đứng trước đó
     if (closePopupBtn && popupOverlay) {
         closePopupBtn.addEventListener('click', () => {
             popupOverlay.classList.remove('active');
-            document.body.classList.remove('popup-open'); // Mở khóa cuộn trang nền dưới
+            document.body.classList.remove('popup-open'); // Mở khóa cuộn trang tự do
         });
         
-        // Đóng popup khi kích chuột ra ngoài vùng hộp đen nội dung (vùng Overlay trống)
+        // Tắt popup khi click ra ngoài vùng hộp đen nội dung (vùng mờ overlay)
         popupOverlay.addEventListener('click', (e) => {
             if (e.target === popupOverlay) {
                 popupOverlay.classList.remove('active');
@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     const originalNumber = numberDOM.innerText;
                     
                     numberDOM.innerText = "COPIED! ✓";
-                    numberDOM.style.color = "#00ff66";
+                    numberDOM.style.color = "#00ff66"; // Đổi chữ màu xanh neon thành công
                     
                     setTimeout(() => {
                         numberDOM.innerText = originalNumber;
                         numberDOM.style.color = "#d1d1d1";
                     }, 1200);
                 }).catch(err => {
-                    console.error('Lỗi sao chép: ', err);
+                    console.error('Không thể tự động sao chép: ', err);
                 });
             }
         });
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                sectionObserver.unobserve(entry.target);
+                sectionObserver.unobserve(entry.target); // Ngừng quan sát khi đã hiện xong để tối ưu CPU
             }
         });
     }, observerOptions);

@@ -1,5 +1,4 @@
-/* --- CÁC CẤU HÌNH GỐC ĐÃ CÓ - GIỮ NGUYÊN VÀ BỔ SUNG PHẦN DƯỚI ĐÂY --- */
-
+/* --- DESIGN SYSTEM (DARK MINIMALISM) --- */
 :root {
     --bg-color: #050505;
     --text-color: #ffffff;
@@ -23,6 +22,7 @@ body {
     line-height: 1.6;
 }
 
+/* Lớp phủ mờ nền hạt mịn cinematic */
 .bg-overlay {
     position: fixed;
     top: 0;
@@ -35,12 +35,14 @@ body {
     pointer-events: none;
 }
 
+/* --- CONTAINER --- */
 .container {
     max-width: 700px;
     margin: 0 auto;
     padding: 60px 20px;
 }
 
+/* --- HEADER SECTION --- */
 header {
     text-align: center;
     margin-bottom: 60px;
@@ -99,6 +101,7 @@ header .bio p {
     margin-bottom: 4px;
 }
 
+/* --- SECTION STYLE & ANIMATIONS --- */
 section {
     margin-bottom: 60px;
     opacity: 0;
@@ -122,6 +125,7 @@ h2.section-title {
     font-weight: normal;
 }
 
+/* --- TIMELINE --- */
 .timeline-item {
     position: relative;
     padding-left: 24px;
@@ -168,6 +172,7 @@ h2.section-title {
     color: #666666;
 }
 
+/* --- GALLERY ARTWORK GRID --- */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -220,6 +225,7 @@ h2.section-title {
     opacity: 1;
 }
 
+/* --- LINK DIRECTORY --- */
 .links-list {
     display: flex;
     flex-direction: column;
@@ -267,6 +273,7 @@ h2.section-title {
     transform: translateX(2px);
 }
 
+/* --- BANKING ACCOUNTS --- */
 .bank-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -286,7 +293,6 @@ h2.section-title {
 }
 
 .bank-name {
-    font-size: 0.7 Club;
     font-size: 0.7rem;
     color: var(--accent-color);
     text-transform: uppercase;
@@ -320,37 +326,33 @@ h2.section-title {
     }
 }
 
-/* ==================== PHẦN CSS BỔ SUNG ĐỂ DỰNG POPUP MORE LINKS ==================== */
-
-/* Khung nền phủ đen mờ mượt toàn màn hình */
+/* --- POPUP PANEL OVERLAY CONFIG --- */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(3, 3, 3, 0.96); /* Đen mờ sâu sắc nghệ thuật */
-    backdrop-filter: blur(8px); /* Tạo hiệu ứng mờ kính cường lực kính cho background */
-    z-index: 10000; /* Luôn nổi lên trên cùng */
+    background-color: rgba(3, 3, 3, 0.96); 
+    backdrop-filter: blur(8px); 
+    z-index: 10000; 
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    pointer-events: none; /* Vô hiệu tương tác khi chưa mở */
+    pointer-events: none; 
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Khi active popup sẽ hiển thị */
 .popup-overlay.active {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Hộp chứa danh sách link ở giữa màn hình */
 .popup-content {
     width: 100%;
     max-width: 600px;
-    max-height: 85vh; /* Chiều cao tối đa bằng 85% màn hình thiết bị */
+    max-height: 85vh; 
     background-color: #080808;
     border: 1px solid var(--border-color);
     padding: 30px;
@@ -364,7 +366,6 @@ h2.section-title {
     transform: scale(1) translateY(0);
 }
 
-/* Tiêu đề popup và nút đóng nằm trên cùng */
 .popup-header {
     display: flex;
     justify-content: space-between;
@@ -381,7 +382,6 @@ h2.section-title {
     font-weight: normal;
 }
 
-/* Nút Tắt Đóng popup tối giản cơ khí máy tính */
 .popup-close-btn {
     background: none;
     border: 1px solid var(--border-color);
@@ -399,7 +399,6 @@ h2.section-title {
     border-color: #ffffff;
 }
 
-/* Vùng chứa danh sách các link mở rộng có thanh cuộn mượt ẩn */
 .popup-links-container {
     overflow-y: auto;
     flex-grow: 1;
@@ -409,7 +408,6 @@ h2.section-title {
     padding-right: 4px;
 }
 
-/* Tùy biến thanh cuộn trong hộp popup cho gọn đẹp */
 .popup-links-container::-webkit-scrollbar {
     width: 3px;
 }
@@ -420,7 +418,59 @@ h2.section-title {
     background: #222222;
 }
 
-/* Khóa hành vi cuộn của trang chính khi popup đang mở */
 body.popup-open {
-    overflow: hidden;
+    overflow: hidden; /* Khóa cuộn trang nền dưới */
+}
+
+/* ==================== ĐOẠN ĐÃ SỬA: NÚT GỌI ĐIỆN CỐ ĐỊNH (FLOATING CALL BUTTON) ==================== */
+.mobile-call-btn {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    background-color: #ffffff !important; /* Luôn là nền trắng sang trọng */
+    color: #000000 !important; /* Chữ và icon đen */
+    text-decoration: none !important;
+    display: flex !important; /* Ép buộc kích hoạt flex hiển thị */
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 20px !important;
+    border-radius: 40px !important; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important; 
+    font-size: 0.85rem !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    z-index: 99999 !important; /* Chỉ số siêu cao để nổi trên mọi bề mặt, kể cả nền popup đen */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.call-icon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: #000000 !important; /* Ép icon màu đen đồng bộ */
+    transition: fill 0.3s ease !important;
+}
+
+/* Hiệu ứng Hover mượt mà cho PC & Mobile */
+.mobile-call-btn:hover {
+    transform: translateY(-4px) !important; 
+    background-color: #00ff66 !important; /* Đổi sang màu xanh công nghệ neon khi chỉ chuột vào */
+    color: #000000 !important;
+    box-shadow: 0 12px 40px rgba(0, 255, 102, 0.3) !important;
+}
+
+.mobile-call-btn:active {
+    transform: translateY(-1px) scale(0.96) !important; 
+}
+
+/* Tối ưu hóa màn hình điện thoại nhỏ */
+@media screen and (max-width: 400px) {
+    .mobile-call-btn {
+        padding: 12px !important;
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+    .call-text {
+        display: none !important; /* Ẩn chữ chừa lại icon điện thoại tròn tối giản trên mobile nhỏ */
+    }
 }
