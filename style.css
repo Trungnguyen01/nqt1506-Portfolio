@@ -8,6 +8,10 @@
     --hover-border: #444444;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +19,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-/* ẨN THANH CUỘN DỌC TOÀN TRANG WEB TRÊN PC TRÌNH DUYỆT CHROME/SAFARI */
 ::-webkit-scrollbar {
     display: none !important;
     width: 0px !important;
@@ -27,7 +30,6 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
     -webkit-text-size-adjust: 100%;
-    /* Ẩn thanh cuộn trên trình duyệt Firefox & IE */
     scrollbar-width: none; 
     -ms-overflow-style: none; 
 }
@@ -95,18 +97,53 @@ header p.subtitle {
     margin-bottom: 24px;
 }
 
-header .bio {
+/* THAY THẾ CSS MỚI GIÚP ĐỊA CHỈ CĂN GIỮA TUYỆT ĐỐI */
+header .bio-centered {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
     font-size: 0.85rem;
-    color: #999999;
-    border-left: 1px solid #222;
-    padding-left: 16px;
-    text-align: left;
+    text-align: center; /* Căn giữa nội dung văn bản */
 }
 
-header .bio p {
-    margin-bottom: 4px;
+.location-link {
+    text-decoration: none;
+    color: #999999;
+    display: inline-block;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+}
+
+.location-link:hover {
+    color: var(--text-color);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.quick-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+    margin: 30px auto 10px;
+    padding: 12px 10px;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #8c8c8c;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+}
+
+.nav-item:hover {
+    color: var(--text-color);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
 }
 
 section {
@@ -114,6 +151,7 @@ section {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    scroll-margin-top: 30px; 
 }
 
 section.visible {
@@ -136,34 +174,40 @@ h2.section-title {
     position: relative;
     padding-left: 20px;
     border-left: 1px solid var(--border-color);
-    margin-bottom: 24px;
-    transition: border-color 0.3s;
+    margin-bottom: 20px;
+    transition: border-color 0.4s ease;
 }
 
-.timeline-item:hover {
-    border-left-color: var(--hover-border);
+.timeline-header {
+    cursor: pointer;
+    padding: 6px 0;
 }
 
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -3px;
-    top: 8px;
-    width: 5px;
-    height: 5px;
+    left: -4px;
+    top: 14px;
+    width: 7px;
+    height: 7px;
     background-color: #333;
     border-radius: 50%;
-    transition: background-color 0.3s;
+    transition: all 0.4s ease;
 }
 
-.timeline-item:hover::before {
+.timeline-item:hover, .timeline-item.active {
+    border-left-color: var(--hover-border);
+}
+
+.timeline-item:hover::before, .timeline-item.active::before {
     background-color: var(--text-color);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 .timeline-time {
     font-size: 0.75rem;
     color: var(--accent-color);
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     letter-spacing: 0.5px;
 }
 
@@ -171,11 +215,69 @@ h2.section-title {
     font-size: 0.9rem;
     font-weight: bold;
     color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timeline-title::after {
+    content: '↓';
+    font-size: 0.75rem;
+    color: #444;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s;
+}
+
+.timeline-item:hover .timeline-title::after {
+    color: #888;
+}
+
+.timeline-item.active .timeline-title::after {
+    transform: rotate(-180deg);
+    color: var(--text-color);
 }
 
 .timeline-subtitle {
     font-size: 0.8rem;
     color: #666666;
+}
+
+.timeline-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    opacity: 0;
+}
+
+.timeline-item.active .timeline-details {
+    max-height: 500px; 
+    opacity: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.work-bullets {
+    list-style-type: none;
+    padding-left: 4px;
+}
+
+.work-bullets li {
+    font-size: 0.8rem;
+    color: #b0b0b0;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 14px;
+    line-height: 1.5;
+}
+
+.work-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: #444;
+}
+
+.work-bullets li strong {
+    color: #e0e0e0;
 }
 
 .gallery-grid {
@@ -317,7 +419,6 @@ h2.section-title {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE CHO MOBILE */
 @media (max-width: 600px) {
     .container {
         padding: 30px 16px 120px; 
@@ -333,13 +434,21 @@ h2.section-title {
         font-size: 1.25rem;
         letter-spacing: 3px;
     }
+    .quick-nav {
+        margin: 24px auto 5px;
+        padding: 10px 4px;
+    }
+    .nav-item {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        padding: 4px 2px;
+    }
     .popup-content {
         width: 92% !important;
         padding: 24px 16px !important;
     }
 }
 
-/* ==================== FIX: POPUP CHẬM MƯỢT & NHUỘM ĐEN THANH TRƯỢT PC ==================== */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -355,7 +464,6 @@ h2.section-title {
     align-items: center;
     opacity: 0;
     pointer-events: none; 
-    /* Xuất hiện nhè nhẹ mượt mà */
     transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
@@ -373,7 +481,6 @@ h2.section-title {
     padding: 30px;
     display: flex;
     flex-direction: column;
-    /* Vụt từ dưới lên sâu lắng */
     transform: scale(0.9) translateY(30px);
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); 
 }
@@ -423,13 +530,10 @@ h2.section-title {
     gap: 10px;
     padding-right: 4px;
     -webkit-overflow-scrolling: touch; 
-    
-    /* Ẩn thanh cuộn mặc định Firefox & IE */
     scrollbar-width: none !important; 
     -ms-overflow-style: none !important; 
 }
 
-/* THAY MÀU THANH TRƯỢT THÀNH MÀU ĐEN TRÙNG MÀU NỀN TRÊN CHROME/EDGE PC */
 .popup-links-container::-webkit-scrollbar {
     width: 6px !important;
     background-color: #0a0a0a !important;
@@ -440,17 +544,15 @@ h2.section-title {
 }
 
 .popup-links-container::-webkit-scrollbar-thumb {
-    background-color: #0a0a0a !important; /* Đen tuyền tàng hình */
+    background-color: #0a0a0a !important;
     border-radius: 10px;
 }
 
-/* LỚP KHÓA CUỘN NỀN CHÍNH */
 body.popup-open {
     overflow: hidden !important;
     height: 100vh !important;
 }
 
-/* ==================== NÚT GỌI ĐIỆN LUÔN LUÔN LƠ LỬNG ==================== */
 .mobile-call-btn {
     position: fixed !important;
     bottom: 28px !important; 

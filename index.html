@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trung Nguyen Quang // Portfolio</title>
     
+    <!-- Chặn trình duyệt di động tự động biến số tài khoản thành màu xanh nước biển -->
     <meta name="format-detection" content="telephone=no">
     
     <meta name="description" content="Portfolio & Creative Space of Nguyen Quang Trung">
@@ -29,40 +30,110 @@
             <h1>NGUYEN QUANG TRUNG</h1>
             <p class="subtitle">15/06/2001 // @trng_c3ntr4le</p>
             
-            <div class="bio">
-                <p>📍 Hai Phong city, Vietnam ϟ LX Pantos (Intern - NOW)</p>
-                <p>vào đây tìm gì?</p>
+            <!-- ĐỊA CHỈ ĐÃ ĐƯỢC CHUYỂN THÀNH LINK MAPS VÀ SỬA LẠI CLASS ĐỂ CĂN GIỮA -->
+            <div class="bio-centered">
+                <a href="https://maps.app.goo.gl/nX8r2rYeq324eN4y9" target="_blank" rel="noopener noreferrer" class="location-link">
+                    📍An Dương, Hai Phong city, Vietnam
+                </a>
             </div>
+
+            <!-- THANH ĐIỀU HƯỚNG NHANH (QUICK NAVIGATION) -->
+            <nav class="quick-nav">
+                <a href="#education-section" class="nav-item">EDUCATION</a>
+                <a href="#networks-section" class="nav-item">NETWORKS</a>
+                <a href="#banking-section" class="nav-item">BANKING</a>
+            </nav>
         </header>
 
-        <section class="scroll-anim">
+        <!-- EDUCATION & WORK SECTION -->
+        <section class="scroll-anim" id="education-section">
             <h2 class="section-title">౨ৎ EDUCATION & WORK</h2>
             
+            <!-- Item 1: LX Pantos (Đã đổi thành Staff và cập nhật nội dung tiếng Anh) -->
             <div class="timeline-item">
-                <div class="timeline-time">Mar 2025 – Apr 2026</div>
-                <div class="timeline-title">4P Electronics</div>
-                <div class="timeline-subtitle">QA (Audit)</div>
+                <div class="timeline-header">
+                    <div class="timeline-time">Present</div>
+                    <div class="timeline-title">LX PANTOS</div>
+                    <div class="timeline-subtitle">Staff</div>
+                </div>
+                <div class="timeline-details">
+                    <ul class="work-bullets">
+                        <li><strong>Outbound Container Coordinator (Key Account: LG Electronics):</strong> Plan and issue container stuffing/delivery orders specifically for finished goods from LG Electronics factory; streamline outbound logistics workflows to ensure on-time dispatch and shipment integrity.</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Item 2: 4P Electronics -->
             <div class="timeline-item">
-                <div class="timeline-time">Sep 2022 – Mar 2025</div>
-                <div class="timeline-title">Mia Education Academy</div>
-                <div class="timeline-subtitle">Staff</div>
+                <div class="timeline-header">
+                    <div class="timeline-time">Mar 2025 – Apr 2026</div>
+                    <div class="timeline-title">4P ELECTRONICS JSC</div>
+                    <div class="timeline-subtitle">QA Audit</div>
+                </div>
+                <div class="timeline-details">
+                    <ul class="work-bullets">
+                        <li>Managed daily LPA audits.</li>
+                        <li>Oversaw weekly and monthly ESD audits (internal/external).</li>
+                        <li>Managed internal and external process audits.</li>
+                        <li>Maintained FI11 documentation.</li>
+                        <li>Managed CP/PFMEA and prepared Reverse PFMEA reports for Renault products.</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Item 3: Mia Education Academy -->
             <div class="timeline-item">
-                <div class="timeline-time">Dec 2022 – May 2023</div>
-                <div class="timeline-title">VDS Agency</div>
-                <div class="timeline-subtitle">Media Team Member</div>
+                <div class="timeline-header">
+                    <div class="timeline-time">Sep 2022 – Feb 2025</div>
+                    <div class="timeline-title">Mia Education Academy</div>
+                    <div class="timeline-subtitle">Digital Marketing Executive</div>
+                </div>
+                <div class="timeline-details">
+                    <ul class="work-bullets">
+                        <li>Built and grew social media channels: <strong>A box of Mia</strong> (1.6K likes, 1.7K followers), <strong>Vali size S</strong> (854 likes, 961 followers), IG <strong>@aboxofmia</strong> (1063 followers).</li>
+                        <li>Managed three Facebook pages (Education, Study Abroad, Blog).</li>
+                        <li>Ran Facebook Ads, scheduled posts, and handled content-related issues.</li>
+                        <li>Provided consultation for study programs and study abroad opportunities.</li>
+                        <li>Oversaw a student base of 150–180 on average.</li>
+                        <li>After obtaining an IELTS 5.0 certificate, took on a teaching role for students aged 5–10.</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Item 4: VDS Agency -->
             <div class="timeline-item">
-                <div class="timeline-time">2019 – 2023</div>
-                <div class="timeline-title">Hai Phong University</div>
-                <div class="timeline-subtitle">Information Technology</div>
+                <div class="timeline-header">
+                    <div class="timeline-time">Dec 2023 – May 2024</div>
+                    <div class="timeline-title">VDS Agency</div>
+                    <div class="timeline-subtitle">Digital Marketing Executive</div>
+                </div>
+                <div class="timeline-details">
+                    <ul class="work-bullets">
+                        <li>Built and grew social media channels: <strong>Cá Voi Thở</strong> (438 likes, 616 followers).</li>
+                        <li>Managed a Facebook page for a nonprofit organization focused on career counseling and digital content creation in Hai Phong.</li>
+                        <li>Ran advertising campaigns to boost engagement and reach.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Item 5: Hai Phong University -->
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div class="timeline-time">Sep 2019 – 2023</div>
+                    <div class="timeline-title">Hai Phong University</div>
+                    <div class="timeline-subtitle">Bachelor of Information Technology</div>
+                </div>
+                <div class="timeline-details">
+                    <ul class="work-bullets">
+                        <li>Major: Information Technology.</li>
+                        <li>Language certification: 5.0 IELTS.</li>
+                        <li>Core skills developed: Systems analysis, basic front-end development, network management, and technical troubleshooting.</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
+        <!-- VISUAL SPACES SECTION -->
         <section class="scroll-anim">
             <h2 class="section-title">౨ৎ VISUAL SPACES</h2>
             <div class="gallery-grid">
@@ -105,10 +176,10 @@
             </div>
         </section>
 
+        <!-- NETWORKS & CONTACTS -->
         <section class="scroll-anim" id="networks-section">
             <h2 class="section-title">౨ৎ NETWORKS & CONTACTS</h2>
             <div class="links-list">
-                
                 <a href="https://www.tiktok.com/@c3ntr4le" target="_blank" rel="noopener noreferrer" class="link-card">
                     <div class="link-info">
                         <h3>TikTok</h3>
@@ -125,6 +196,7 @@
                     <span class="arrow">→</span>
                 </a>
 
+                <!-- Nút bấm mở Popup -->
                 <div class="link-card" id="open-more-btn" style="cursor: pointer;">
                     <div class="link-info">
                         <h3 style="color: #a3a3a3; letter-spacing: 2.5px;">● ● ● MORE NETWORKS</h3>
@@ -132,11 +204,11 @@
                     </div>
                     <span class="arrow">↓</span>
                 </div>
-
             </div>
         </section>
 
-        <section class="scroll-anim">
+        <!-- BANKING DETAILED SECTION -->
+        <section class="scroll-anim" id="banking-section">
             <h2 class="section-title">౨ৎ BANKING DETAILED (CLICK TO COPY)</h2>
             <div class="bank-grid">
                 <div class="bank-card" data-copy="0967375548" title="Click để sao chép">
@@ -160,6 +232,7 @@
 
     </div>
 
+    <!-- POPUP PANEL OVERLAY -->
     <div class="popup-overlay" id="more-links-popup">
         <div class="popup-content">
             <div class="popup-header">
@@ -243,6 +316,7 @@
         </div>
     </div>
 
+    <!-- NÚT GỌI ĐIỆN CỐ ĐỊNH -->
     <a href="tel:0964375548" class="mobile-call-btn">
         <svg class="call-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>

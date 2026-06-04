@@ -50,7 +50,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- 3. INTERSECTION OBSERVER (SCROLL ANIMATION) ---
+    // --- 3. CHỨC NĂNG MỚI: BẤM MỐC THỜI GIAN ĐỂ HIỆN CHI TIẾT ---
+    const timelineHeaders = document.querySelectorAll('.timeline-header');
+    timelineHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const parentItem = this.parentElement;
+            
+            // Nếu muốn bấm mở cái này thì tự động đóng cái kia lại (chỉ mở 1 cái duy nhất):
+            /*
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                if (item !== parentItem) item.classList.remove('active');
+            });
+            */
+            
+            // Bật/tắt trạng thái mở rộng của mốc thời gian vừa chọn
+            parentItem.classList.toggle('active');
+        });
+    });
+
+    // --- 4. INTERSECTION OBSERVER (SCROLL ANIMATION) ---
     const scrollSections = document.querySelectorAll('.scroll-anim');
     const observerOptions = {
         root: null,
